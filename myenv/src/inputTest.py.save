@@ -1,0 +1,27 @@
+import RPi.GPIO as GPIO
+import time
+
+switchPin = 22
+switchPin2 = 23 
+ledPin = 4
+num = 0
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(switchPin,GPIO.IN)
+GPIO.setup(switchPin2,GPIO.IN)
+GPIO.setup(ledPin, GPIO.OUT)
+
+GPIO.output(ledPin,GPIO.LOW)
+try:
+	while True:
+		if GPIO.input(switchPin) == False
+		   if num == 2 
+         	num = 0
+				
+		if num == 0:
+			GPIO.output(ledPin,GPIO.HIGH)
+		else:
+			GPIO.output(ledPin,GPIO.LOW)
+			
+
+except KeyboardInterrupt:
+	GPIO.cleanup()

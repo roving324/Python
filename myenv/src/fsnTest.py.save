@@ -1,0 +1,83 @@
+import sys, termios, tty, os, time
+import RPi.GPIO as GPIO
+import time
+
+a = 14
+b = 15
+c = 18
+d = 23
+e = 24
+f = 25
+g = 8
+dp = 7
+
+digit4 = 2
+digit3 = 3
+digit2 = 4
+digit1 = 17
+
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(a,GPIO.OUT)
+GPIO.setup(b,GPIO.OUT)
+GPIO.setup(c,GPIO.OUT)
+GPIO.setup(d,GPIO.OUT)
+GPIO.setup(e,GPIO.OUT)
+GPIO.setup(f,GPIO.OUT)
+GPIO.setup(g,GPIO.OUT)
+GPIO.setup(dp,GPIO.OUT)
+GPIO.setup(digit4,GPIO.OUT)
+GPIO.setup(digit3,GPIO.OUT)
+GPIO.setup(digit2,GPIO.OUT)
+GPIO.setup(digit1,GPIO.OUT)
+
+
+def getch():
+	fd = sys.stdin.fileno()
+	old_settings = termios.tcgetattr(fd)
+	try:
+		tty.setraw(sys.stdin.fileno())
+		ch = sys.stdin.read(1)
+	finally:
+		termios.tcsetattr(fd,termios.TCSADRAIN,old_settings)
+	return ch
+# a b c d e f g dp 7,8,9
+pin = [a,b,c,d,e,f,g]
+num = [[1,1,1,1,1,1,0],[0,1,1,0,0,0,0],[1,1,0,1,1,0,1],[1,1,1,1,0,0,1],[0,1,1,0,0,1,1],[1,0,1,1,0,1,1],[1,0,1,1,1,1,1],[1,1,1,0,0,0,0],[1,1,1,1,1,1,1],[1,1,1,0,0,1,1]]
+
+def LedPin(nums,char):
+	list.append(char)
+	for i in range(7):
+		GPIO.output(pin[i],num[nums][i])
+
+LedPin(0)
+GPIO.output(dp,0)
+count = 0
+lenth = 1
+list = []
+try:
+	while True:
+		char = getch()
+		if lenth == 1:
+			GPIO.output(digit1,1)
+			lenth = lenth + 1
+		if char == 'a':
+			GPIO.cleanup()
+			break
+		if lenth == 1:
+			GPIO.output(digit1,1)
+			if char == '.':
+				if count % 2 == 0:
+					GPIO.output(dp,1)
+				elif count % 2 == 1:
+					GPIO.output(dp,0)
+				count = count + 1
+				continue
+			if char.isdigit() == False:
+				continu
+				e
+
+		LedPin(int(char))
+
+except keyboardInterrupt:
+	GPIO.cleanup()
